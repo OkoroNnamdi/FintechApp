@@ -1,0 +1,17 @@
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTechCore.deps.json
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTechCore.dll
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTechCore.pdb
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.csproj.AssemblyReference.cache
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.AssemblyInfoInputs.cache
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.AssemblyInfo.cs
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.csproj.CoreCompileInputs.cache
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.dll
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\refint\FinTechCore.dll
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.pdb
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\ref\FinTechCore.dll
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTech.DB.dll
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTech.DB.pdb
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.csproj.CopyComplete
+C:\FinTechApi\FinTechCore\bin\Debug\net6.0\FinTechCore.runtimeconfig.json
+C:\FinTechApi\FinTechCore\obj\Debug\net6.0\FinTechCore.genruntimeconfig.cache
