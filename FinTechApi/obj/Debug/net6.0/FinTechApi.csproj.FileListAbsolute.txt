@@ -258,3 +258,4 @@ C:\FinTechApi\FinTechApi\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.r
 C:\FinTechApi\FinTechApi\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\FinTechApi\FinTechApi\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\FinTechApi\FinTechApi\obj\Debug\net6.0\FinTechApi.MvcApplicationPartsAssemblyInfo.cs
+C:\FinTechApi\FinTechApi\bin\Debug\net6.0\AspNetCoreHero.Results.dll

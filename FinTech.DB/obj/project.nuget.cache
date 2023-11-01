@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6adF8EMre6YjZFO2El93ZWEu9Y0rPSVqztRVc6343kmQLQ3baf/NU8r7lGFA2EuRp90GcKOqZfX4lKsh4baBrQ==",
+  "dgSpecHash": "t67AAf8FIKryuu8Kk6w0r87WhUD50q1G+avrsVbj3miVz9MnBNypj5zZKO7j5NBeq5USoy8Or6MRFeVFmUc50w==",
   "success": true,
   "projectFilePath": "C:\\FinTechApi\\FinTech.DB\\FinTech.DB.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Decagon Device\\.nuget\\packages\\aspnetcorehero.results\\1.1.1\\aspnetcorehero.results.1.1.1.nupkg.sha512",
     "C:\\Users\\Decagon Device\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Decagon Device\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Decagon Device\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",

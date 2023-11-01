@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "FinTech.DB/1.0.0": {
         "dependencies": {
+          "AspNetCoreHero.Results": "1.1.1",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.EntityFrameworkCore": "6.0.15",
@@ -19,6 +20,14 @@
         },
         "runtime": {
           "FinTech.DB.dll": {}
+        }
+      },
+      "AspNetCoreHero.Results/1.1.1": {
+        "runtime": {
+          "lib/net5.0/AspNetCoreHero.Results.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.0"
+          }
         }
       },
       "AutoMapper/12.0.1": {
@@ -2572,6 +2581,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AspNetCoreHero.Results/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lDGVoFLfNv4glcbVa2geDNiuHRfAl62Zt2rH0gBklYZLOImedH8HBaVoI3yGUQiRXqOXMhItM/lvkrn9qbXRdA==",
+      "path": "aspnetcorehero.results/1.1.1",
+      "hashPath": "aspnetcorehero.results.1.1.1.nupkg.sha512"
     },
     "AutoMapper/12.0.1": {
       "type": "package",

@@ -54,6 +54,7 @@ namespace FinTechApi.Controllers
         public async Task<IActionResult> MakeTransfer(string fromWallet, string toWallet, double amount, string TransactionPin)
         {
             if (!Regex.IsMatch(fromWallet, @"(?<!\d)\d{10}(?!\d)") || !Regex.IsMatch(toWallet, @"(?<!\d)\d{10}(?!\d)")) return BadRequest("Wallet Number must be 10-digit");
+            await _transactions.MakeTransfer(fromWallet, toWallet, amount, TransactionPin);
             return Ok(await _transactions.MakeTransfer(fromWallet, toWallet, amount, TransactionPin));
         }
         [HttpGet]

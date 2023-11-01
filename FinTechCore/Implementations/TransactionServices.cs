@@ -1,4 +1,5 @@
-﻿using FinTech.DB;
+﻿using AspNetCoreHero.Results;
+using FinTech.DB;
 using FinTechCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using static FinTech.DB.Transaction;
@@ -37,7 +39,6 @@ namespace FinTechCore.Implementations
 
             return response;
         }
-
         public async  Task<Response> CreateNewTransaction(Transaction transactions)
         {
             Response response = new Response();
@@ -67,25 +68,21 @@ namespace FinTechCore.Implementations
             Account destinationAccount;
 
             Transaction transaction = new Transaction();
-            //var authUser = this._acccountService.Authenticate(accountNumber, TransactionPin);
-            //if (authUser == null)
-            //    throw new ApplicationException("Invalid credentials");
             try
             {
+                if (string.IsNullOrWhiteSpace(accountNumber))
+                    throw new ApplicationException("Invalid transaction credentials");
+                if (amount < 0)
+                    throw new ApplicationException("Invalid transaction amount");
                 //sourceAccount = this.walletServices.GetWalletByWalletNumber(_OurWalletStatementAccount);
                 destinationAccount = this._acccountService.GetAccountByAccountNumber(accountNumber );
-
-                //sourceAccount.Amount -= amount;
                 destinationAccount.Amount += amount;
-
                 if ((_context.Entry(destinationAccount).State == EntityState.Modified))
                 {
                     transaction.TransactionStatus = TranStatus.Success;
                     response.ResponseCode = "00";
                     response.ResponseMessage = "Transaction sucessful";
                     response.Data = null;
-
-
                 }
                 else
                 {
@@ -94,17 +91,12 @@ namespace FinTechCore.Implementations
                     response.ResponseCode = "02";
                     response.Data = null;
                 }
-
-                // transaction.tran
-
-
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"AN ERROR OCCURRED=> {ex.Message}");
+                return new Response() {  ResponseMessage = ex.Message };
             }
             transaction.TransactionType = Transtype.Deposit;
-            //transaction.TransactionSourceAccount = _OurWalletStatementAccount;
             transaction.TransactionDestinationAccount = accountNumber ;
             transaction.TransactionAmount = (decimal)amount;
             transaction.TransactionDate = DateTime.Now;
@@ -119,30 +111,29 @@ namespace FinTechCore.Implementations
 
             await _context .Transactions.AddAsync(transaction);
             await _context.SaveChangesAsync();
-
-
-
             return response;
         }
-
         public async  Task<Response> MakeTransfer(string fromWallet, string toWallet, double amount, string TransactionPin)
         {
-            Response response = new Response();
-            Account  sourceAccount;
-            Account  destinationAccount;
 
+            Response response = new Response();
+            Account sourceAccount, destinationAccount;
             Transaction transaction = new Transaction();
-            var authUser = this._acccountService.Authenticate(fromWallet, TransactionPin);
-            if (authUser == null)
-                throw new ApplicationException("Invalid credentials");
+
             try
             {
-                sourceAccount = this._acccountService.GetAccountByAccountNumber(fromWallet);
-                destinationAccount = this._acccountService.GetAccountByAccountNumber(toWallet);
-
+                if (string.IsNullOrWhiteSpace(fromWallet) || string.IsNullOrWhiteSpace(toWallet))
+                    throw new ApplicationException("Invalid transaction credentials");
+                if (amount < 0)
+                    throw new ApplicationException("Invalid transaction amount");
+                sourceAccount = _acccountService.GetAccountByAccountNumber(fromWallet);
+                destinationAccount = _acccountService.GetAccountByAccountNumber(toWallet);
+                if (sourceAccount.Amount < 1000)
+                    throw new Exception("Insufficient Amount");
+                if (sourceAccount.Amount < amount)
+                    throw new ApplicationException("Insufficient transaction Amount");
                 sourceAccount.Amount -= amount;
                 destinationAccount.Amount += amount;
-
                 if ((_context.Entry(sourceAccount).State == EntityState.Modified) &&
                         (_context.Entry(destinationAccount).State == EntityState.Modified))
                 {
@@ -150,8 +141,7 @@ namespace FinTechCore.Implementations
                     response.ResponseCode = "00";
                     response.ResponseMessage = "Transaction sucessful";
                     response.Data = null;
-
-
+                    
                 }
                 else
                 {
@@ -160,14 +150,13 @@ namespace FinTechCore.Implementations
                     response.ResponseCode = "02";
                     response.Data = null;
                 }
-
-                // transaction.tran
-
-
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"AN ERROR OCCURRED=> {ex.Message}");
+                return new Response
+                {
+                    ResponseMessage =$"Transaction failed {ex.Message}" ,
+                };
             }
             transaction.TransactionType = Transtype.Transfer;
             transaction.TransactionSourceAccount = fromWallet;
@@ -176,31 +165,23 @@ namespace FinTechCore.Implementations
             transaction.TransactionDate = DateTime.Now;
 
             transaction.TransactionParticulars = $"NEW TRANSACTION FRO" +
-                $"M SOURCE => " +
-                $"{JsonConvert.SerializeObject(transaction.TransactionSourceAccount)}" +
-                $" TO DESTINATION ACCOUNT=>{JsonConvert.SerializeObject(transaction.TransactionDestinationAccount)} " +
-                $"ON DATE => {transaction.TransactionDate}" +
-                $" FOR AMOUNT => {JsonConvert.SerializeObject(transaction.TransactionAmount)}" +
-                $" TRANSACTION TYPE =>{JsonConvert.SerializeObject(transaction.TransactionType)}" +
-                $" TRANSACTION STATUS => {JsonConvert.SerializeObject(transaction.TransactionStatus)}";
+            $"M SOURCE => " +
+            $"{JsonConvert.SerializeObject(transaction.TransactionSourceAccount)}" +
+            $" TO DESTINATION ACCOUNT=>{JsonConvert.SerializeObject(transaction.TransactionDestinationAccount)} " +
+            $"ON DATE => {transaction.TransactionDate}" +
+            $" FOR AMOUNT => {JsonConvert.SerializeObject(transaction.TransactionAmount)}" +
+            $" TRANSACTION TYPE =>{JsonConvert.SerializeObject(transaction.TransactionType)}" +
+            $" TRANSACTION STATUS => {JsonConvert.SerializeObject(transaction.TransactionStatus)}";
 
-            await _context .Transactions.AddAsync(transaction);
+            await _context.Transactions.AddAsync(transaction);
             await _context.SaveChangesAsync();
+            
+        return response;
 
-
-
-            return response;
-
-
-        }
-    
-
-        public async  Task<Response> MakeWithdrawal(string accountNumber, double amount, string TransactionPin)
+    } public async  Task<Response> MakeWithdrawal(string accountNumber, double amount, string TransactionPin)
         {
             Response response = new Response();
             Account  sourceAccount;
-            // Wallet destinationAccount;
-
             Transaction transaction = new Transaction();
             var authUser = this._acccountService.Authenticate(accountNumber, TransactionPin);
             if (authUser == null)
@@ -208,10 +189,7 @@ namespace FinTechCore.Implementations
             try
             {
                 sourceAccount = _acccountService.GetAccountByAccountNumber(accountNumber);
-                // destinationAccount = this.walletServices.GetWalletByWalletNumber(_OurWalletStatementAccount);
-
                 sourceAccount.Amount -= amount;
-                // destinationAccount.Amount += amount;
 
                 if ((_context.Entry(sourceAccount).State == EntityState.Modified))
                 {
@@ -229,9 +207,6 @@ namespace FinTechCore.Implementations
                     response.ResponseCode = "02";
                     response.Data = null;
                 }
-
-                // transaction.tran
-
 
             }
             catch (Exception ex)
@@ -254,12 +229,7 @@ namespace FinTechCore.Implementations
 
             await _context .Transactions.AddAsync(transaction);
             await _context.SaveChangesAsync();
-
-
-
             return response;
-
-
         }
     }
 }

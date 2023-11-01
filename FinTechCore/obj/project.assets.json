@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AspNetCoreHero.Results/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/AspNetCoreHero.Results.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/AspNetCoreHero.Results.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "AutoMapper/12.0.1": {
         "type": "package",
         "dependencies": {
@@ -3826,6 +3839,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "AspNetCoreHero.Results": "1.1.1",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.EntityFrameworkCore": "6.0.15",
@@ -3843,6 +3857,22 @@
     }
   },
   "libraries": {
+    "AspNetCoreHero.Results/1.1.1": {
+      "sha512": "lDGVoFLfNv4glcbVa2geDNiuHRfAl62Zt2rH0gBklYZLOImedH8HBaVoI3yGUQiRXqOXMhItM/lvkrn9qbXRdA==",
+      "type": "package",
+      "path": "aspnetcorehero.results/1.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aspnetcorehero.results.1.1.1.nupkg.sha512",
+        "aspnetcorehero.results.nuspec",
+        "lib/net5.0/AspNetCoreHero.Results.dll",
+        "lib/net5.0/AspNetCoreHero.Results.xml",
+        "lib/netcoreapp3.1/AspNetCoreHero.Results.dll",
+        "lib/netcoreapp3.1/AspNetCoreHero.Results.xml",
+        "logo-transparent.png"
+      ]
+    },
     "AutoMapper/12.0.1": {
       "sha512": "hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
       "type": "package",
@@ -10922,6 +10952,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "AspNetCoreHero.Results >= 1.1.1",
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "FinTech.DB >= 1.0.0",
@@ -10984,6 +11015,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "AspNetCoreHero.Results": {
+            "target": "Package",
+            "version": "[1.1.1, )"
+          },
           "AutoMapper": {
             "target": "Package",
             "version": "[12.0.1, )"

@@ -12,8 +12,6 @@ namespace FinTech.DB.DTO
         public Transaction.Transtype TransactionType { get; set; }
 
         public string TransactionSourceAccount { get; set; }
-        [Required]
-        public string TransactionDestinationAccount { get; set; }
         public decimal TransactionAmount { get; set; }
         public DateTime TransactionDate { get; set; }
     }
