@@ -98,12 +98,11 @@ namespace FinTechApi.Controllers
         }
         [HttpDelete]
         [Route("Delete_By_AccountNumber")]
-        public async Task<IActionResult >DeleteAccount(int accountNumber)
+        public  IActionResult DeleteAccount(int accountNumber)
         {
             if (!ModelState.IsValid || accountNumber == 0) return BadRequest(ModelState);
             _acccountService.Delete(accountNumber);
             return  Ok();
-
         }
        
         [HttpGet]

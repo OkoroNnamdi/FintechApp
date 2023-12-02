@@ -1,6 +1,7 @@
 using FinTech.DB;
 using FinTech.DB.DTO;
 using FinTechApi;
+using FinTechApi.Extension;
 using FinTechCore.Implementations;
 using FinTechCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +9,21 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+var services = builder.Services;
 
+builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddTransient<ICurrencyAPI, CurrentApiService>();
 builder.Services.AddTransient<IAcccountService, AccountService>();
 builder.Services.AddTransient<ITransaction, TransactionServices>();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddHttpClient();
+
+builder.Services.AddAuthentication();
+// Add Jwt Authentication and Authorization
+services.ConfigureAuthentication(config);
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
