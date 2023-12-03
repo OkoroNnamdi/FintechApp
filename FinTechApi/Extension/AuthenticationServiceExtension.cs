@@ -4,11 +4,10 @@ using System.Text;
 
 namespace FinTechApi.Extension
 {
-    public static  class AuthenticationServiceExtension
+    public static class AuthenticationServiceExtension
     {
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = true,
@@ -21,9 +20,7 @@ namespace FinTechApi.Extension
                     .UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
                 ClockSkew = TimeSpan.Zero
             };
-
             services.AddSingleton(tokenValidationParameters);
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,7 +31,6 @@ namespace FinTechApi.Extension
            {
                options.SaveToken = true;
                options.TokenValidationParameters = tokenValidationParameters;
-
            });
 
         }

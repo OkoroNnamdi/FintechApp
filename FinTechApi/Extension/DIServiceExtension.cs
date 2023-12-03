@@ -18,7 +18,8 @@ namespace FinTechApi.Extension
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ITokenDetails, TokenDetails>();
             services.AddScoped<IEmailService,EmailService>();
-            // Add repository 
+
+            //Add repository 
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         }
     }

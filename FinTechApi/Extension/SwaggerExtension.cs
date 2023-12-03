@@ -9,7 +9,7 @@ namespace FinTechApi.Extension
             // This method gets called by the runtime from the startup "ConfigureServices()" to add swagger.
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "hotel_booking_api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fin_Tech_App", Version = "v1" });
                 // To Enable authorization using Swagger (JWT) 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
