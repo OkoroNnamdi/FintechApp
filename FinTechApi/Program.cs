@@ -4,6 +4,9 @@ using FinTechApi;
 using FinTechApi.Extension;
 using FinTechCore.Implementations;
 using FinTechCore.Interfaces;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
@@ -13,12 +16,20 @@ var config = builder.Configuration;
 var services = builder.Services;
 
 builder.Services.AddHttpClient();
-// Add services to the container.
-builder.Services.AddTransient<ICurrencyAPI, CurrentApiService>();
-builder.Services.AddTransient<IAcccountService, AccountService>();
-builder.Services.AddTransient<ITransaction, TransactionServices>();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>()
+                .AddScoped<IUrlHelper>(x =>
+                    x.GetRequiredService<IUrlHelperFactory>()
+                        .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext));
+// for entity framework
+builder.Services.AddDbContext<AppDbContext>(options => 
+options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+builder.Services.ConfigureMailService(config);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// Register Dependency Injection Service Extension
+builder.Services.AddDependencyInjection();
+// Configure Identity
+builder.Services.ConfigureIdentity();
 
 builder.Services.AddAuthentication();
 // Add Jwt Authentication and Authorization

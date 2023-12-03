@@ -101,6 +101,10 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[3.0.1, )"
@@ -238,6 +242,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[4.2.0, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

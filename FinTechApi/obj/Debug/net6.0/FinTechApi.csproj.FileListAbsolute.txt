@@ -276,3 +276,5 @@ C:\FinTechApi\FinTechApi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyD
 C:\FinTechApi\FinTechApi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\FinTechApi\FinTechApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\FinTechApi\FinTechApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\FinTechApi\FinTechApi\bin\Debug\net6.0\MailKit.dll
+C:\FinTechApi\FinTechApi\bin\Debug\net6.0\NETCore.MailKit.dll

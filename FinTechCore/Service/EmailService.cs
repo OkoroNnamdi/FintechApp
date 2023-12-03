@@ -5,7 +5,8 @@ using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
+using MailKit.Net.Smtp;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,10 +39,10 @@ namespace FinTechCore.Service
             {
                 try
                 {
-                    //await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
-                    //client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    //await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
-                    //await client.SendAsync(mailMessage);
+                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                    await client.SendAsync(mailMessage);
                 }
                 catch
                 {
@@ -50,7 +51,7 @@ namespace FinTechCore.Service
                 }
                 finally
                 {
-                    //client.Disconnect(true);
+                    client.Disconnect(true);
                     client.Dispose();
                 }
             }
